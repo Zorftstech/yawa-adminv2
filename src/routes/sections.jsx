@@ -9,6 +9,7 @@ const UserPage = lazy(() => import('src/pages/user'));
 const LoginPage = lazy(() => import('src/pages/login'));
 const ProductsPage = lazy(() => import('src/pages/products'));
 const Page404 = lazy(() => import('src/pages/page-not-found'));
+const ForgotPasswordPage = lazy(() => import('src/pages/forgot-password'));
 
 // ----------------------------------------------------------------------
 
@@ -23,6 +24,14 @@ export default function Router() {
       element: (
         <Suspense fallback={<div>Loading...</div>}>
           <LoginPage />
+        </Suspense>
+      ),
+    },
+    {
+      path: 'forgot-password',
+      element: (
+        <Suspense fallback={<div>Loading...</div>}>
+          <ForgotPasswordPage />
         </Suspense>
       ),
     },

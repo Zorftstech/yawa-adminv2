@@ -1,24 +1,22 @@
-import React, { useState } from 'react';
 import axios from 'axios';
-import { alpha, styled, useTheme } from '@mui/material/styles';
-import { Box, Link, Card, Stack, Typography, IconButton, InputAdornment, InputLabel, TextField, Checkbox } from '@mui/material';
+import React, { useState } from 'react';
+import { alpha, useTheme } from '@mui/material/styles';
+import { Box, Link, Card, Stack, Typography, IconButton, InputLabel, TextField } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { useRouter } from 'src/routes/hooks';
 import { bgGradient } from 'src/theme/css';
 import Logo from 'src/components/logo';
-import Iconify from 'src/components/iconify';
+// import ArrowBackIcon from '@mui/icons-material/ArrowBack'; // Optional: Uncomment if you need an icon for navigation
 
 // ----------------------------------------------------------------------
 
-export default function LoginView() {
+export default function ForgotPasswordView() {
   // Retrieve the current theme and router instance
   const theme = useTheme();
   const router = useRouter();
 
-  // State variables for managing form input and loading/error states
-  const [showPassword, setShowPassword] = useState(false);
+  // State variables for managing form input, loading, and error states
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -26,14 +24,14 @@ export default function LoginView() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const apiUrl = 'https://api.yawaapp.com.ng/api/admin/auth/login';
+    const apiUrl = 'https://api.yawaapp.com.ng/api/admin/auth/login'; // URL for password reset API
 
     setLoading(true);
     setError(null);
 
     try {
-      // Send POST request to the API with email and password
-      const response = await axios.post(apiUrl, { email, password }, {
+      // Send POST request to the API with email
+      const response = await axios.post(apiUrl, { email }, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -41,7 +39,7 @@ export default function LoginView() {
 
       setLoading(false);
 
-      // Redirect to dashboard if login is successful
+      // Redirect to dashboard if request is successful
       if (response.status === 200) {
         router.push('/dashboard');
       } else {
@@ -49,7 +47,7 @@ export default function LoginView() {
       }
     } catch (catchError) {
       setLoading(false);
-      // Display error message if login fails
+      // Display error message if request fails
       setError(catchError.response?.data?.message || 'Invalid Credentials');
     }
   };
@@ -57,7 +55,7 @@ export default function LoginView() {
   // Validate email format
   const isEmailValid = (emailAddress) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailAddress);
 
-  // Label for the checkbox
+  // Label for the checkbox (not used in this component, but included for completeness)
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
   return (
@@ -84,8 +82,8 @@ export default function LoginView() {
       >
         <Logo sx={{ mb: 6 }} />
 
-        <Typography variant='h4' style={{ marginBottom:30, textAlign: 'center' }}>
-          Log in to your account
+        <Typography variant='h4' style={{ marginBottom: 30, textAlign: 'center' }}>
+          Forgot Password?
         </Typography>
 
         <Card
@@ -98,10 +96,7 @@ export default function LoginView() {
           }}
         >
           <form onSubmit={handleSubmit}>
-            <Stack spacing={2} sx={{ 
-              display: 'grid',
-              width: '100%' 
-            }}>
+            <Stack spacing={2} sx={{ display: 'grid', width: '100%' }}>
               <InputLabel htmlFor='email'>
                 Email
               </InputLabel>
@@ -111,6 +106,7 @@ export default function LoginView() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 error={!!email && !isEmailValid(email)}
+                helperText={!!email && !isEmailValid(email) ? 'Enter a valid email' : ''}
                 placeholder='Enter your email address'
                 inputProps={{
                   'aria-label': 'Email',
@@ -124,41 +120,6 @@ export default function LoginView() {
                   py: 0,
                 }}
               />
-
-              <InputLabel htmlFor='password'>
-                Password
-              </InputLabel>
-              <TextField
-                id='password'
-                name='password'
-                type={showPassword ? 'text' : 'password'} // Toggle password visibility
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder='Enter your password'
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position='end'>
-                      <IconButton onClick={() => setShowPassword(!showPassword)} edge='end'>
-                        <Iconify icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} />
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-                fullWidth
-                size='small'
-                sx={{
-                  '& .MuiInputBase-root': {
-                    boxSizing: 'border-box', // Ensures padding is included in width and height calculations
-                  },
-                }}
-              />
-            </Stack>
-
-            <Stack direction='row' alignItems='center' justifyContent='space-between' sx={{ my: 3 }}>
-              <span><Checkbox {...label} /> Remember me</span>
-              <Link variant='subtitle2' underline='hover' href='/forgot-password'>
-                Forgot password?
-              </Link>
             </Stack>
 
             {error && (
@@ -173,6 +134,7 @@ export default function LoginView() {
               variant='contained'
               size='medium'
               sx={{
+                mt: 5,
                 py: 1,
                 backgroundColor: '#03BDE9',
                 color: '#FFF',
@@ -183,10 +145,26 @@ export default function LoginView() {
               }}
               loading={loading}
             >
-              Log in
+              Reset Password
             </LoadingButton>
           </form>
         </Card>
+
+        <Stack direction='row' alignItems='center' justifyContent='center' sx={{ my: 3 }}>
+          <IconButton onClick={() => router.push('/login')}>
+            <img src='assets/icons/Feather_Icons.svg' alt=''/>
+          </IconButton>
+          <Link 
+            variant='subtitle2' 
+            underline='hover' 
+            onClick={() => router.push('/login')}
+            sx={{
+              color: '#204D88'
+            }}
+          >
+            Return to Log in
+          </Link>
+        </Stack>
       </Stack>
     </Box>
   );
