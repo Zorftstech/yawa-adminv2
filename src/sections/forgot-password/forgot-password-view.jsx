@@ -41,9 +41,9 @@ export default function ForgotPasswordView() {
 
       // Redirect to dashboard if request is successful
       if (response.status === 200) {
-        router.push('/dashboard');
+        router.push('/reset-password');
       } else {
-        setError(response.data.message || 'Login failed');
+        setError(response.data.message || 'Email not registered');
       }
     } catch (catchError) {
       setLoading(false);
