@@ -5,10 +5,10 @@ export const useCircle = () => {
 
     const {
         data,
-        isLoading,
-        isSuccess,
-        isError,
-        error,
+        // isLoading,
+        // isSuccess,
+        // isError,
+        // error,
       } = useGetCirclesQuery();
 
 

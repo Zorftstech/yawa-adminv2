@@ -5,10 +5,10 @@ export const useResponder = () => {
 
     const {
         data,
-        isLoading,
-        isSuccess,
-        isError,
-        error,
+        // isLoading,
+        // isSuccess,
+        // isError,
+        // error,
       } = useGetResponderQuery();
 
 

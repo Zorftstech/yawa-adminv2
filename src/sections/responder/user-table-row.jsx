@@ -80,11 +80,8 @@ export default function UserTableRow({
 
 UserTableRow.propTypes = {
   name: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  city: PropTypes.string.isRequired,
-  state: PropTypes.string.isRequired,
-  number: PropTypes.string.isRequired,
-  status: PropTypes.string.isRequired,
-  created: PropTypes.string.isRequired,
-  avatarUrl: PropTypes.string.isRequired,
+  emerynum: PropTypes.string.isRequired,
+  Handler: PropTypes.string.isRequired,
+  Created: PropTypes.string.isRequired,
+
 };

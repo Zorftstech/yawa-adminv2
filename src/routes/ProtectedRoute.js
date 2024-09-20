@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { selectCurrentToken } from 'src/features/slide/authSlice';
+// import { useSelector } from 'react-redux';
+// import { selectCurrentToken } from 'src/features/slide/authSlice';
 import { useRouter } from './hooks';
 
 const ProtectedRoute = () => {

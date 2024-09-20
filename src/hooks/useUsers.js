@@ -6,10 +6,10 @@ export const useUsers = () => {
 
     const {
         data,
-        isLoading,
-        isSuccess,
-        isError,
-        error,
+        // isLoading,
+        // isSuccess,
+        // isError,
+        // error,
       } = useGetUsersQuery();
 
       const totalUsers = data?.data?.totalUsers || 0;

@@ -5,12 +5,10 @@ import TableCell from '@mui/material/TableCell';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
-import Avatar from '@mui/material/Avatar';
 import Popover from '@mui/material/Popover';
 import MenuItem from '@mui/material/MenuItem';
 import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';
-import { account } from 'src/_mock/account';
 
 export default function UserTableRow({
   name,
@@ -83,11 +81,10 @@ export default function UserTableRow({
 
 UserTableRow.propTypes = {
   name: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
+  member: PropTypes.any.isRequired,
   city: PropTypes.string.isRequired,
   state: PropTypes.string.isRequired,
   number: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired,
   created: PropTypes.string.isRequired,
-  avatarUrl: PropTypes.string.isRequired,
 };

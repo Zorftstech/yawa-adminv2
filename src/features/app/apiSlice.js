@@ -1,5 +1,6 @@
-import { BASEURLAPI } from 'src/utils/api';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { BASEURLAPI } from 'src/utils/api';
+
 import { logOut } from '../slide/authSlice';
 
 

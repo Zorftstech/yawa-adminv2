@@ -1,14 +1,13 @@
-import React from 'react'
 import { useRouter } from 'src/routes/hooks';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import { useLoginMutation } from 'src/features/app/authSlide';
 
 
 export const useAuth = () => {
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const router = useRouter();
-    const [login, { isLoading }] = useLoginMutation();
+    const [login] = useLoginMutation();
 
 
     const handlelogin = async (email, password, setLoading,setError ) => {
