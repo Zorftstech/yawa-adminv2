@@ -14,13 +14,11 @@ import { account } from 'src/_mock/account';
 
 export default function UserTableRow({
   name,
-  email,
+  member,
   city,
-  state,
   number,
   status,
   created,
-  avatarUrl,
 }) {
   const [open, setOpen] = useState(null);
 
@@ -38,23 +36,17 @@ export default function UserTableRow({
     <>
       <TableRow hover tabIndex={-1}>
         <TableCell component="th" scope="row" padding="none">
-          <Stack direction="row" alignItems="center" spacing={4}>
-          {    avatarUrl ?    <Avatar alt={name} src={avatarUrl} /> :
-            <Avatar alt={name} src={account.avatar} />}
-          
-       
+          <Stack direction="row" alignItems="center">
             <Typography variant="subtitle2" noWrap>
               {name}
             </Typography>
           </Stack>
         </TableCell>
 
-        <TableCell>{email}</TableCell>
-        <TableCell>{city}</TableCell>
-        <TableCell>{state}</TableCell>
+        <TableCell>{member}</TableCell>
         <TableCell>{number}</TableCell>
         <TableCell>
-          <Label color={status === 'banned' ? 'error' : 'success'}>{status}</Label>
+          <Label color={status === 'banned' ? 'error' : 'success'}>{status}success</Label>
         </TableCell>
         <TableCell>{created}</TableCell>
 

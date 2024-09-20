@@ -1,0 +1,1 @@
+export const BASEURLAPI = "https://cors-anywhere.herokuapp.com/https://api.yawaapp.com.ng"

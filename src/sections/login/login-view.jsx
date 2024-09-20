@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import PropTypes from 'prop-types'; 
 import { alpha, useTheme } from '@mui/material/styles';
 import { Box, Link, Card, Stack, TextField, Typography, IconButton, InputAdornment } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -7,12 +7,12 @@ import { useRouter } from 'src/routes/hooks';
 import { bgGradient } from 'src/theme/css';
 import Logo from 'src/components/logo';
 import Iconify from 'src/components/iconify';
+import { useAuth } from 'src/hooks/useAuth';
 
 // ----------------------------------------------------------------------
 
 export default function LoginView() {
   const theme = useTheme();
-  const router = useRouter();
 
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
@@ -20,34 +20,16 @@ export default function LoginView() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const {handlelogin} = useAuth()
+
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent default form submission behavior
-  
-    const apiUrl = 'https://cors-anywhere.herokuapp.com/https://api.yawaapp.com.ng/api/admin/auth/login';
-  
     setLoading(true);
-    setError(null);
-  
-    try {
-      const response = await axios.post(apiUrl, { email, password }, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-  
-      setLoading(false);
-  
-      if (response.status === 200) {
-        // Handle successful login
-        router.push('/dashboard');
-      } else {
-        setError(response.data.message || 'Login failed');
-      }
-    } catch (catchError) { // Rename the variable to avoid shadowing
-      setLoading(false);
-      setError(catchError.response.data.message || 'Invalid Credentials');
-    }
+    await handlelogin(email, password, setLoading,setError )
+
+ 
   };
+
   
   
 
