@@ -7,7 +7,6 @@ import { PersistGate } from 'redux-persist/integration/react';
 import Router from 'src/routes/sections';
 import ThemeProvider from 'src/theme';
 import {store,  persistor  } from './features/api/store';
-import ProtectedRoute from './routes/ProtectedRoute';
 
 // ----------------------------------------------------------------------
 
