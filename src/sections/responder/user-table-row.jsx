@@ -14,13 +14,10 @@ import { account } from 'src/_mock/account';
 
 export default function UserTableRow({
   name,
-  email,
-  city,
-  state,
-  number,
-  status,
-  created,
-  avatarUrl,
+  emerynum,
+  Handler,
+  Created,
+  
 }) {
   const [open, setOpen] = useState(null);
 
@@ -38,25 +35,17 @@ export default function UserTableRow({
     <>
       <TableRow hover tabIndex={-1}>
         <TableCell component="th" scope="row" padding="none">
-          <Stack direction="row" alignItems="center" spacing={4}>
-          {    avatarUrl ?    <Avatar alt={name} src={avatarUrl} /> :
-            <Avatar alt={name} src={account.avatar} />}
-          
-       
+          <Stack direction="row" alignItems="center">
             <Typography variant="subtitle2" noWrap>
               {name}
             </Typography>
           </Stack>
         </TableCell>
 
-        <TableCell>{email}</TableCell>
-        <TableCell>{city}</TableCell>
-        <TableCell>{state}</TableCell>
-        <TableCell>{number}</TableCell>
-        <TableCell>
-          <Label color={status === 'banned' ? 'error' : 'success'}>{status}</Label>
-        </TableCell>
-        <TableCell>{created}</TableCell>
+        <TableCell>{emerynum}</TableCell>
+        <TableCell>{Handler}</TableCell>
+        
+        <TableCell>{Created}</TableCell>
 
         <TableCell align="right">
           <IconButton onClick={handleOpenMenu}>
@@ -91,11 +80,8 @@ export default function UserTableRow({
 
 UserTableRow.propTypes = {
   name: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  city: PropTypes.string.isRequired,
-  state: PropTypes.string.isRequired,
-  number: PropTypes.string.isRequired,
-  status: PropTypes.string.isRequired,
-  created: PropTypes.string.isRequired,
-  avatarUrl: PropTypes.string.isRequired,
+  emerynum: PropTypes.string.isRequired,
+  Handler: PropTypes.string.isRequired,
+  Created: PropTypes.string.isRequired,
+
 };

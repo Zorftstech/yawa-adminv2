@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import { alpha, styled, useTheme } from '@mui/material/styles';
-import { Box, Link, Card, Stack, Typography, IconButton, InputAdornment, InputLabel, TextField, Checkbox } from '@mui/material';
+import PropTypes from 'prop-types'; 
+import { alpha, useTheme } from '@mui/material/styles';
+import { Box, Link, Card, Stack, TextField, Typography, IconButton, InputAdornment } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { useRouter } from 'src/routes/hooks';
 import { bgGradient } from 'src/theme/css';
 import Logo from 'src/components/logo';
 import Iconify from 'src/components/iconify';
+import { useAuth } from 'src/hooks/useAuth';
 
 // ----------------------------------------------------------------------
 
 export default function LoginView() {
   // Retrieve the current theme and router instance
   const theme = useTheme();
-  const router = useRouter();
 
   // State variables for managing form input and loading/error states
   const [showPassword, setShowPassword] = useState(false);
@@ -22,43 +22,20 @@ export default function LoginView() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Handle form submission
+  const {handlelogin} = useAuth()
+
   const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    const apiUrl = 'https://api.yawaapp.com.ng/api/admin/auth/login';
-
+    event.preventDefault(); // Prevent default form submission behavior
     setLoading(true);
-    setError(null);
+    await handlelogin(email, password, setLoading,setError )
 
-    try {
-      // Send POST request to the API with email and password
-      const response = await axios.post(apiUrl, { email, password }, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      setLoading(false);
-
-      // Redirect to dashboard if login is successful
-      if (response.status === 200) {
-        router.push('/dashboard');
-      } else {
-        setError(response.data.message || 'Login failed');
-      }
-    } catch (catchError) {
-      setLoading(false);
-      // Display error message if login fails
-      setError(catchError.response?.data?.message || 'Invalid Credentials');
-    }
+ 
   };
 
-  // Validate email format
-  const isEmailValid = (emailAddress) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailAddress);
+  
+  
 
-  // Label for the checkbox
-  const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+  const isEmailValid = emailAddress => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailAddress);
 
   return (
     <Box

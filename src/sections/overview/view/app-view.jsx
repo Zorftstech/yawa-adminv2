@@ -1,5 +1,6 @@
 import { faker } from '@faker-js/faker';
-
+import { useUsers } from 'src/hooks/useUsers';
+import { useCircle } from 'src/hooks/useCircle';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
@@ -13,9 +14,25 @@ import AppWidgetSummary from '../app-widget-summary';
 import AppCurrentSubject from '../app-current-subject';
 import AppConversionRates from '../app-conversion-rates';
 
+
 // ----------------------------------------------------------------------
 
 export default function AppView() {
+
+
+  const { totalUsers } = useUsers()
+  const { totalCircles } = useCircle()
+
+
+
+
+
+ 
+
+
+
+
+
   return (
     <Container maxWidth="xl">
       <Typography variant="h4" sx={{ mb: 5 }}>
@@ -31,7 +48,7 @@ export default function AppView() {
     <Grid item xs={12} sm={6} md={4}>
       <AppWidgetSummary
         title="Registered Users"
-        total={501245}
+        total={totalUsers}
         color="success"
         icon={<img alt="icon" src="/assets/icons/glass/ic_glass_bag.png" />}
       />
@@ -40,7 +57,7 @@ export default function AppView() {
     <Grid item xs={12} sm={6} md={4}>
       <AppWidgetSummary
         title="Safety Circles"
-        total={234245}
+        total={totalCircles}
         color="info"
         icon={<img alt="icon" src="/assets/icons/glass/ic_glass_users.png" />}
       />

@@ -5,22 +5,18 @@ import TableCell from '@mui/material/TableCell';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
-import Avatar from '@mui/material/Avatar';
 import Popover from '@mui/material/Popover';
 import MenuItem from '@mui/material/MenuItem';
 import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';
-import { account } from 'src/_mock/account';
 
 export default function UserTableRow({
   name,
-  email,
+  member,
   city,
-  state,
   number,
   status,
   created,
-  avatarUrl,
 }) {
   const [open, setOpen] = useState(null);
 
@@ -38,23 +34,17 @@ export default function UserTableRow({
     <>
       <TableRow hover tabIndex={-1}>
         <TableCell component="th" scope="row" padding="none">
-          <Stack direction="row" alignItems="center" spacing={4}>
-          {    avatarUrl ?    <Avatar alt={name} src={avatarUrl} /> :
-            <Avatar alt={name} src={account.avatar} />}
-          
-       
+          <Stack direction="row" alignItems="center">
             <Typography variant="subtitle2" noWrap>
               {name}
             </Typography>
           </Stack>
         </TableCell>
 
-        <TableCell>{email}</TableCell>
-        <TableCell>{city}</TableCell>
-        <TableCell>{state}</TableCell>
+        <TableCell>{member}</TableCell>
         <TableCell>{number}</TableCell>
         <TableCell>
-          <Label color={status === 'banned' ? 'error' : 'success'}>{status}</Label>
+          <Label color={status === 'banned' ? 'error' : 'success'}>{status}success</Label>
         </TableCell>
         <TableCell>{created}</TableCell>
 
@@ -91,11 +81,10 @@ export default function UserTableRow({
 
 UserTableRow.propTypes = {
   name: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
+  member: PropTypes.any.isRequired,
   city: PropTypes.string.isRequired,
   state: PropTypes.string.isRequired,
   number: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired,
   created: PropTypes.string.isRequired,
-  avatarUrl: PropTypes.string.isRequired,
 };

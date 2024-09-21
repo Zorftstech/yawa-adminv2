@@ -4,10 +4,10 @@ import { Outlet, Navigate, useRoutes } from 'react-router-dom';
 import DashboardLayout from 'src/layouts/dashboard';
 
 const IndexPage = lazy(() => import('src/pages/app'));
-const BlogPage = lazy(() => import('src/pages/blog'));
 const UserPage = lazy(() => import('src/pages/user'));
 const LoginPage = lazy(() => import('src/pages/login'));
-const ProductsPage = lazy(() => import('src/pages/products'));
+const CirclePage = lazy(() => import('src/pages/circle'));
+const ResponderPage = lazy(() => import('src/pages/responder'));
 const Page404 = lazy(() => import('src/pages/page-not-found'));
 const ForgotPasswordPage = lazy(() => import('src/pages/forgot-password'));
 const ResetPasswordPage = lazy(() => import('src/pages/reset-password'));
@@ -46,6 +46,7 @@ export default function Router() {
     },
     {
       element: (
+
         <DashboardLayout>
           <Suspense fallback={<div>Loading...</div>}>
             <Outlet />
@@ -55,8 +56,8 @@ export default function Router() {
       children: [
         { path: 'dashboard', element: <IndexPage />, index: true },
         { path: 'user', element: <UserPage /> },
-        { path: 'products', element: <ProductsPage /> },
-        { path: 'blog', element: <BlogPage /> },
+        { path: 'circles', element: <CirclePage /> },
+        { path: 'first-responders', element: <ResponderPage /> },
       ],
     },
     {

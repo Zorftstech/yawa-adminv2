@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 import PropTypes from 'prop-types'; 
-import { useUsers } from 'src/hooks/useUsers';
+import { useResponder } from 'src/hooks/useResponder';
+import { emptyRows, applyFilter, getComparator } from '../utils';
 
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
@@ -24,11 +25,11 @@ import TableNoData from '../table-no-data';
 import UserTableRow from '../user-table-row';
 import UserTableHead from '../user-table-head';
 import TableEmptyRows from '../table-empty-rows';
-import { emptyRows, applyFilter, getComparator } from '../utils';
+
 
 // ----------------------------------------------------------------------
 
-export default function UserPage() {
+export default function ResponderView() {
   const [page, setPage] = useState(0);
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('name');
@@ -36,7 +37,8 @@ export default function UserPage() {
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
 
-  const { totalUsers, userdata } = useUsers()
+  const { responder} = useResponder()
+
 
 
 
@@ -64,7 +66,7 @@ export default function UserPage() {
   };
 
   const dataFiltered = applyFilter({
-    inputData: userdata,
+    inputData: responder,
     comparator: getComparator(order, orderBy),
     filterName,
   });
@@ -77,13 +79,13 @@ export default function UserPage() {
   return (
     <Container>
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-        <Typography style={{marginBottom: 40}} variant="h4">User Accounts <br /> <span style={{color: '#292727', fontSize: "16px", fontWeight: 400, lineHeight: "19.36px"}}>Manage accounts created by Yawa app users.</span></Typography>
+        <Typography style={{marginBottom: 40}} variant="h4">First Responders<br /> <span style={{color: '#292727', fontSize: "16px", fontWeight: 400, lineHeight: "19.36px"}}>Manage safety oriented organizations withing the state.</span></Typography>
 
         <Stack direction="row" spacing={2}>
           <TextField
             value={filterName}
             onChange={handleFilterByName}
-            placeholder="Search users"
+            placeholder="Search safety circle"
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -97,11 +99,11 @@ export default function UserPage() {
           />
           <Button
             variant="contained"
-            style={{ background: "#03BDE9", width: "171px", height: "40px", borderRadius: "4px" }}
+            style={{ background: "#03BDE9", width: "181px", height: "40px", borderRadius: "4px" }}
             color="inherit"
             startIcon={<Iconify icon="eva:plus-fill" />}
           >
-            Create New User
+          Create New Circle
           </Button>
         </Stack>
       </Stack>
@@ -113,22 +115,21 @@ export default function UserPage() {
               <UserTableHead
                 order={order}
                 orderBy={orderBy}
-                rowCount={totalUsers}
+                rowCount={responder?.length}
                 numSelected={0} // No selected rows since we're not using checkboxes
                 onRequestSort={handleSort}
                 
+               
                 headLabel={[
                   { id: 'name', label: 'Name' },
-                  { id: 'email', label: 'Email' },
-                  { id: 'city', label: 'City' },
-                  { id: 'state', label: 'State' },
-                  { id: 'number', label: 'Number' },
-                  { id: 'status', label: 'Status' },
-                  { id: 'created', label: 'Created' },
+                  { id: 'Emergency No.', label: 'Emergency No.' },
+                  { id: 'Handler', label: 'Handler' },
+                  { id: 'Created', label: 'Created' },
                   { id: '', label: '' },
                   
                 ]}
               />
+             
               <TableBody>
                 {dataFiltered
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -136,19 +137,15 @@ export default function UserPage() {
                     <UserTableRow
                       key={row.id}
                       name={row.name}
-                      email={row.email}
-                      city={row.city}
-                      state={row.state}
-                      number={row.phoneNumber}
-                      status={row.status}
-                      created={row.dateCreated}
-                      avatarUrl={row.picture}
+                      emerynum={row.members.length}
+                      Handler={row.city}
+                      Created={row.dateCreated}
                     />
                   ))}
 
                 <TableEmptyRows
                   height={77}
-                  emptyRows={emptyRows(page, rowsPerPage, totalUsers)}
+                  emptyRows={emptyRows(page, rowsPerPage, responder?.length)}
                 />
 
                 {notFound && <TableNoData query={filterName} />}
@@ -160,7 +157,7 @@ export default function UserPage() {
         <TablePagination
           page={page}
           component="div"
-          count={totalUsers}
+          count={responder?.length}
           rowsPerPage={rowsPerPage}
           onPageChange={handleChangePage}
           rowsPerPageOptions={[5, 10, 25]}
