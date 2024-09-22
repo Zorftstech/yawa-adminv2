@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types'; 
 import { alpha, useTheme } from '@mui/material/styles';
-import { Box, Link, Card, Stack, TextField, Typography, IconButton, InputAdornment } from '@mui/material';
+import { Box, Link, Card, Stack, TextField, Typography, IconButton, InputAdornment, InputLabel, Checkbox } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { useRouter } from 'src/routes/hooks';
 import { bgGradient } from 'src/theme/css';
@@ -36,6 +36,9 @@ export default function LoginView() {
   
 
   const isEmailValid = emailAddress => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailAddress);
+
+   // Label for the checkbox
+   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
   return (
     <Box

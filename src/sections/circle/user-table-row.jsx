@@ -83,7 +83,7 @@ UserTableRow.propTypes = {
   name: PropTypes.string.isRequired,
   member: PropTypes.any.isRequired,
   city: PropTypes.string.isRequired,
-  state: PropTypes.string.isRequired,
+  // state: PropTypes.string.isRequired,
   number: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired,
   created: PropTypes.string.isRequired,

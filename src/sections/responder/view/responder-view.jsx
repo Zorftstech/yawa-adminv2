@@ -1,7 +1,6 @@
 import {  useState } from 'react';
 import PropTypes from 'prop-types'; 
 import { useResponder } from 'src/hooks/useResponder';
-import { emptyRows, applyFilter, getComparator } from '../utils';
 
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
@@ -20,6 +19,7 @@ import TablePagination from '@mui/material/TablePagination';
 
 import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';
+import { emptyRows, applyFilter, getComparator } from '../utils';
 
 import TableNoData from '../table-no-data';
 import UserTableRow from '../user-table-row';
